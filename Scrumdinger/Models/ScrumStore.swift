@@ -9,6 +9,10 @@ import SwiftUI
 
 @MainActor
 final class ScrumStore: ObservableObject {
+    private enum Constants {
+        static let storageName = "scrums.data"
+    }
+    
     @Published var scrums: [DailyScrum] = []
     
     private static func fileURL() throws -> URL {
@@ -18,7 +22,7 @@ final class ScrumStore: ObservableObject {
             appropriateFor: nil,
             create: false
         )
-        .appendingPathComponent("scrums.data")
+        .appendingPathComponent(Constants.storageName)
     }
     
     func load() async throws {
